@@ -1,9 +1,6 @@
 package cz.bernhard.overpass.api.service;
 
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
+
 import cz.bernhard.overpass.api.service.SpeedLimitService;
 import org.junit.Test;
 
@@ -12,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 public class SpeedLimitServiceTest {
 
     @Test
-    public void speedLimitForGivenGps() throws UnirestException {
+    public void speedLimitForGivenGps() {
 
         // given
 

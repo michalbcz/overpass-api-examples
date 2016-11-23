@@ -1,10 +1,9 @@
 package cz.bernhard.overpass.api.service;
 
 
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
-import org.apache.http.client.methods.HttpGet;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
@@ -23,16 +22,14 @@ public class SpeedLimitService {
 
         // http://www.overpass-api.de/api/xapi?*[maxspeed=*][bbox=72.998251,33.670049,72.998451,33.670249]
         String url = " http://www.overpass-api.de/api/xapi?*[maxspeed=*][bbox=" + createBoundBox(latitude, longitude) + "]";
-        System.out.println(url);
-
-//        HttpGet overpass = new HttpGet("http://www.overpass-api.de/api/xapi?*[maxspeed=*][bbox=72.998251,33.670049,72.998451,33.670249]");
-//        overpass.get
+//        System.out.println(url);
 
         try {
-            HttpResponse<String> response = Unirest.get(url).asString();
-            String xmlResponse = response.getBody();
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder().url(url).build();
+            String xmlResponse = client.newCall(request).execute().body().string();
 
-            System.out.println(xmlResponse);
+//            System.out.println(xmlResponse);
 
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
